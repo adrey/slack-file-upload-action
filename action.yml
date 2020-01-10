@@ -1,0 +1,13 @@
+name: 'Slack File Upload'
+description: 'Uploads file to slack'
+inputs:
+  path:  # id of input
+    description: 'Path to file'
+    required: true
+  token: 
+    description: 'Slack token'
+    required: true
+outputs:
+runs:
+  using: 'node12'
+  main: 'index.js'
