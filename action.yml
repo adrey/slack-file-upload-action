@@ -1,6 +1,7 @@
 name: 'Slack File Upload'
-icon: file
-color: red
+branding:
+  icon: file
+  color: red
 description: 'Uploads file to slack'
 inputs:
   path:  # id of input
