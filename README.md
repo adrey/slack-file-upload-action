@@ -12,10 +12,29 @@ This action uploads file to slack
 
 **Required** Path to file
 
+### `channel`
+
+Slack channel for upload
 
 ## Example usage
 
-uses: actions/slack-file-upload-action@v1
-with:
-  token: 'xxxxx-xxxxxxxxx'
-  path: 'path/to/file'
+```
+on: [push]
+
+jobs:
+  slack_upload_job:
+    runs-on: ubuntu-latest
+    name: Upload test file
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - run: echo "Test file " > test.txt
+      - name: Upload to slack step
+        uses: ./ # Uses an action in the root directory
+        with:
+          token: ${{ secrets.SLACK_TOKEN }}
+          path: test.txt
+          channel: random
+```
+
+

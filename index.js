@@ -7,10 +7,11 @@ var fs = require('fs');
 try {
     const token = core.getInput('token');
     const path = core.getInput('path');
+    const channel = core.getInput('channel');
     console.log(`Uploading file ${path} to slack `);
     var form = new FormData();
     form.append('token', token);
-    form.append('channels', "general");
+    form.append('channels', channel);
     form.append('file', fs.createReadStream(path));
     console.log(form.getHeaders())
     form.submit("https://slack.com/api/files.upload", function(err, res) {
