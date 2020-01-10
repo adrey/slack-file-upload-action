@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v1
       - run: echo "Test file " > test.txt
       - name: Upload to slack step
-        uses: ./ # Uses an action in the root directory
+        uses: adrey/slack-file-upload-action@master
         with:
           token: ${{ secrets.SLACK_TOKEN }}
           path: test.txt
