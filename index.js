@@ -13,7 +13,6 @@ try {
     form.append('token', token);
     form.append('channels', channel);
     form.append('file', fs.createReadStream(path));
-    console.log(form.getHeaders())
     form.submit("https://slack.com/api/files.upload", function(err, res) {
         console.log(res.statusCode);
         res.resume();
