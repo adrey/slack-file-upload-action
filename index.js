@@ -15,7 +15,8 @@ try {
 
     var request = http.request({
         method: 'post',
-        host: 'https://slack.com',
+        host: 'slack.com',
+        port: 443,
         path: '/api/files.upload',
         headers: form.getHeaders()
     });
