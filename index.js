@@ -12,21 +12,11 @@ try {
     form.append('token', token);
     form.append('channels', "general");
     form.append('file', fs.createReadStream(path));
-
-    var request = http.request({
-        method: 'post',
-        host: 'slack.com',
-        port: 443,
-        path: '/api/files.upload',
-        headers: form.getHeaders()
-    });
- 
-    form.pipe(request);
- 
-    request.on('response', function(res) {
+    console.log(form.getHeaders())
+    form.submit("https://slack.com/api/files.upload", function(err, res) {
         console.log(res.statusCode);
+        res.resume();
     });
-
 } catch (error) {
     core.setFailed(error.message);
 }
