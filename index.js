@@ -16,7 +16,7 @@ try {
     var form = new FormData();
     form.append('token', token);
     form.append('file', fs.createReadStream(path));
-    if(filename) form.append('filename', fileName);
+    if(filename) form.append('filename', filename);
     if(channel) form.append('channels', channel);
     if(filetype) form.append('filetype', filetype);
     if(initial_comment) form.append('initial_comment', initial_comment);
