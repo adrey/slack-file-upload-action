@@ -16,6 +16,24 @@ This action uploads file to slack
 
 Slack channel for upload
 
+
+### `filename`
+
+Filename of file
+   
+### `filetype`
+
+A file type identifier.
+   
+### `initial_comment`
+
+The message text introducing the file in specified channels.
+    
+### `title`
+
+Title of file
+    
+
 ## Example usage
 
 ```
