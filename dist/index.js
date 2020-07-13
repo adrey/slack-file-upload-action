@@ -53,13 +53,13 @@ var FormData = __webpack_require__(660);
 var fs = __webpack_require__(747);
 
 function processResponse(err, res) {
-    console.log(res);
     console.log(res.statusCode);
-    console.log(res.ok);
-    if(res.ok != true) {
-        throw res.error;
-    }
-    res.resume();
+    res.json().then((data) => {
+        if(data.ok != true) {
+            throw data.error;
+        }
+        res.resume();
+    });
 }
 
 try {

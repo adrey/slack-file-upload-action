@@ -5,13 +5,13 @@ var FormData = require('form-data');
 var fs = require('fs');
 
 function processResponse(err, res) {
-    console.log(res);
     console.log(res.statusCode);
-    console.log(res.ok);
-    if(res.ok != true) {
-        throw res.error;
-    }
-    res.resume();
+    res.json().then((data) => {
+        if(data.ok != true) {
+            throw data.error;
+        }
+        res.resume();
+    });
 }
 
 try {
