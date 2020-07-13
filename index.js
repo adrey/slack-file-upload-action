@@ -4,6 +4,16 @@ var http = require('http');
 var FormData = require('form-data');
 var fs = require('fs');
 
+function processResponse(err, res) {
+    console.log(res);
+    console.log(res.statusCode);
+    console.log(res.ok);
+    if(res.ok != true) {
+        throw res.error;
+    }
+    res.resume();
+}
+
 try {
     const token = core.getInput('token');
     const path = core.getInput('path');
@@ -22,10 +32,8 @@ try {
     if(initial_comment) form.append('initial_comment', initial_comment);
     if(thread_ts) form.append('thread_ts', thread_ts);
     if(title) form.append('title', title);
-    form.submit("https://slack.com/api/files.upload", function(err, res) {
-        console.log(res.statusCode);
-        res.resume();
-    });
+    form.submit("https://slack.com/api/files.upload", processResponse);
 } catch (error) {
     core.setFailed(error.message);
 }
+

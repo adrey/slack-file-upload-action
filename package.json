@@ -21,5 +21,8 @@
     "@actions/core": "^1.2.0",
     "@actions/github": "^2.0.0",
     "form-data": "^3.0.0"
+  },
+  "devDependencies": {
+    "isomorphic-fetch": "^2.2.1"
   }
 }
