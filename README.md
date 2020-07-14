@@ -7,11 +7,11 @@ This action uploads file to slack
 ### `token`
 
 **Required** Slack app token. See [Internal app tokens](https://slack.com/intl/en-ru/help/articles/215770388-Create-and-regenerate-API-tokens#internal-app-tokens)
- Create app
- Add `file:write` permission
- Install app to your workspase
- Invite bot to required channels `/invite <botname>`
- Use bot token from `OAuth & Permissions` page
+* Create app
+* Add `file:write` permission
+* Install app to your workspase
+* Invite bot to required channels `/invite <botname>`
+* Use bot token from `OAuth & Permissions` page
 ### `path`
 
 **Required** Path to file
