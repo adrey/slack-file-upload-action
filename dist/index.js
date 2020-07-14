@@ -62,6 +62,7 @@ function finishWithError(message) {
 
 function submit(form) {
     return new Promise((resolve, reject) => {
+        
         var data = "";
         form.submit("https://slack.com/api/files.upload", (err, res) => {
             if(err) {
@@ -70,10 +71,10 @@ function submit(form) {
                 res.on("data", (chunk) => { data += chunk;});
                 res.on("end", () => {
                     data = JSON.parse(data);
-                    console.log(data);
                     if(data.ok) {
                         resolve(data);
                     } else {
+                        finishWithError(data.error);
                         reject(data.error);
                     }
                 });
@@ -105,7 +106,7 @@ async function run() {
         if(title) form.append('title', title);
         await submit(form);
     } catch (error) {
-        finishWithError(error.message);
+        finishWithError(error);
     }
 
 }
