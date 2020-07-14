@@ -44,7 +44,7 @@ module.exports =
 /******/ ({
 
 /***/ 12:
-/***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
+/***/ (function(module, __unusedexports, __webpack_require__) {
 
 const core = __webpack_require__(572);
 const github = __webpack_require__(558);
@@ -52,14 +52,33 @@ var http = __webpack_require__(605);
 var FormData = __webpack_require__(660);
 var fs = __webpack_require__(747);
 
+
+function finishWithError(message) {
+    console.log(message);
+    core.setFailed(message);
+}
+
 function processResponse(err, res) {
-    console.log(res.statusCode);
-    res.json().then((data) => {
-        if(data.ok != true) {
-            throw data.error;
-        }
-        res.resume();
+console.log(res.statusCode);
+    var data = "";
+    res.resume();
+    res.on("data", (chunk) => {
+        data += chunk;
     });
+    res.on("error", (e) => {
+        finishWithError(e.message);
+    });
+    res.on("end", () => {
+        data = JSON.parse(data);
+        if(!data.ok) {
+            finishWithError(data.message);
+        }
+    });
+    
+}
+
+function submit(form) {
+    form.submit("https://slack.com/api/files.upload", processResponse);
 }
 
 try {
@@ -80,11 +99,12 @@ try {
     if(initial_comment) form.append('initial_comment', initial_comment);
     if(thread_ts) form.append('thread_ts', thread_ts);
     if(title) form.append('title', title);
-    form.submit("https://slack.com/api/files.upload", processResponse);
+    submit(form);
 } catch (error) {
-    core.setFailed(error.message);
+    finishWithError(error.message);
 }
 
+module.exports = { processResponse : processResponse, submit : submit }
 
 
 /***/ }),
