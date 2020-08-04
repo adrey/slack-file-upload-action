@@ -26,6 +26,8 @@ inputs:
     description: 'Title of file'
     required: false 
 outputs:
+    result:
+        description: "response from slack"
 runs:
   using: 'node12'
   main: 'dist/index.js'
