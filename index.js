@@ -10,20 +10,25 @@ function finishWithError(message) {
     core.setFailed(message);
 }
 
+function finish(result) {
+    core.setOutput("result", result);
+}
+
 
 
 function submit(form) {
     return new Promise((resolve, reject) => {
         
-        var data = "";
+        var rawData = "";
         form.submit("https://slack.com/api/files.upload", (err, res) => {
             if(err) {
                 reject(err);
             } else {
-                res.on("data", (chunk) => { data += chunk;});
+                res.on("data", (chunk) => { rawData += chunk;});
                 res.on("end", () => {
-                    data = JSON.parse(data);
+                    var data = JSON.parse(rawData);
                     if(data.ok) {
+                        finish(rawData);
                         resolve(data);
                     } else {
                         finishWithError(data.error);
