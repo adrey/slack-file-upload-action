@@ -24,7 +24,10 @@ inputs:
     required: false
   title:
     description: 'Title of file'
-    required: false 
+    required: false
+  thread_ts:
+    description: 'Timestamp of message thread to upload to.'
+    required: false
 outputs:
     result:
         description: "response from slack"
